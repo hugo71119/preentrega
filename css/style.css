@@ -1,0 +1,33 @@
+.imagen{
+    background-image: linear-gradient(rgba(5, 7, 12, 0.3), rgba(5, 7, 12, 0.3)), url("../img/bg-img-pr3.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 40rem;
+}
+@media (min-width: 992px) { 
+    .ars{
+        display: none;
+    }
+}
+
+.alineacion, .indicadores{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.indicadores{
+    gap: 2.5rem;
+}
+.alineacion{
+    margin-bottom: 3rem;
+}
+.borrar-compra {
+    background-color: red;
+    border-radius: 50%;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin: 0 0 0 0.8rem;
+}
