@@ -4,8 +4,9 @@ const indicadores = document.querySelector('.indicadores')
 const btn = document.querySelector('.boton')
 const botonVacio = document.querySelector('.botonVacio')
 const cerrarCarrito = document.querySelector('.cerrarCarrito')
-
+const totalCarrito = document.querySelector('.totalCarrito')
 let articulosCarrito = []
+let precios = []
 
 cargarEventos()
 function cargarEventos(){
@@ -27,6 +28,24 @@ function cargarEventos(){
         botonVacio.classList.add('d-none')
         cerrarCarrito.classList.add('d-none')
         btn.classList.remove('d-none')
+        totalCarrito.classList.add('d-none')
+    })
+    totalCarrito.addEventListener('click', () => {
+        articulosCarrito.forEach(precio => {
+            const total = parseInt(precio.precio.slice(1,4)) * precio.cantidad
+            
+            precios.push(total)
+            console.log(precios)
+            
+        })
+        console.log('holaaaa')
+        console.log(precios)
+
+        const resultado = precios.reduce((valorPrevio, valorActual) => valorPrevio + valorActual, 0)
+        alert(`El total de su carrito es: $${resultado} USD`)
+
+        precios = []
+        console.log(precios)
     })
 }
 
@@ -103,6 +122,7 @@ function suma(){
         botonVacio.classList.add('d-none')
         btn.classList.remove('d-none')
         cerrarCarrito.classList.add('d-none')
+        totalCarrito.classList.add('d-none')
         alert('Carrito Vacío')
 
     }else{
@@ -111,6 +131,7 @@ function suma(){
         cerrarCarrito.classList.remove('d-none')
         btn.classList.add('d-none')
         botonVacio.classList.remove('d-none')
+        totalCarrito.classList.remove('d-none')
     }
 }
 
