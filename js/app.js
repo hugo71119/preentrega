@@ -5,6 +5,7 @@ const btn = document.querySelector('.boton')
 const botonVacio = document.querySelector('.botonVacio')
 const cerrarCarrito = document.querySelector('.cerrarCarrito')
 const totalCarrito = document.querySelector('.totalCarrito')
+const toast = document.querySelector('.toast')
 let articulosCarrito = []
 let precios = []
 
@@ -16,9 +17,16 @@ function cargarEventos(){
 
     resultadoCarrito.addEventListener('click', eliminarCarrito)
 
+    document.addEventListener('DOMContentLoaded', () => {
+        articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) ?? []
+
+        carrito()
+    })
+
     botonVacio.addEventListener('click', () => {
         articulosCarrito = []
 
+        carrito()
         limpiarHTML();
         suma()
     })
@@ -56,7 +64,11 @@ function agregarCompra(e){
     if (e.target.classList.contains('agregar-carrito')) {
         const compraSeleccionado = e.target.parentElement.parentElement;
         leerDatosCurso(compraSeleccionado);
+        const eventToast = new bootstrap.Toast(toast)
+        eventToast.show()
     }
+
+    
 }
 
 function leerDatosCurso(compra){
@@ -112,6 +124,12 @@ function carrito(){
 
         resultadoCarrito.appendChild(row);
     });
+
+    agregandoStorage()
+}
+
+function agregandoStorage(){
+    localStorage.setItem('carrito', JSON.stringify(articulosCarrito))
 }
 
 function suma(){

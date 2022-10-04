@@ -31,3 +31,9 @@
     font-weight: bold;
     margin: 0 0 0 0.8rem;
 }
+.toast{
+    visibility: visible;
+    position: absolute;
+    top: 80px;
+    left: 10px;
+}
