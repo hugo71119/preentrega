@@ -33,7 +33,7 @@
 }
 .toast{
     visibility: visible;
-    position: absolute;
-    top: 80px;
+    position: sticky;
+    bottom: 15px;
     left: 10px;
 }

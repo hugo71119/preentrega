@@ -5,13 +5,24 @@ const btn = document.querySelector('.boton')
 const botonVacio = document.querySelector('.botonVacio')
 const cerrarCarrito = document.querySelector('.cerrarCarrito')
 const totalCarrito = document.querySelector('.totalCarrito')
+const divMensaje = document.querySelector('.divMensaje')
+const mensaje = document.querySelector('.mensaje')
 const toast = document.querySelector('.toast')
+const modalOpen = document.querySelector('.modal-open')
+const cuerpo = document.querySelector('body')
+
+let resultado
 let articulosCarrito = []
 let precios = []
+
+if (articulosCarrito.length === 0) {
+    btn.setAttribute('data-bs-toggle', 'modal')
+}
 
 cargarEventos()
 function cargarEventos(){
     listaCompras.addEventListener('click', agregarCompra);
+
 
     btn.addEventListener('click', suma)
 
@@ -37,26 +48,24 @@ function cargarEventos(){
         cerrarCarrito.classList.add('d-none')
         btn.classList.remove('d-none')
         totalCarrito.classList.add('d-none')
+        divMensaje.classList.add('d-none')
     })
-    totalCarrito.addEventListener('click', () => {
-        articulosCarrito.forEach(precio => {
-            const total = parseInt(precio.precio.slice(1,4)) * precio.cantidad
-            
-            precios.push(total)
-            console.log(precios)
-            
-        })
-        console.log('holaaaa')
-        console.log(precios)
-
-        const resultado = precios.reduce((valorPrevio, valorActual) => valorPrevio + valorActual, 0)
-        alert(`El total de su carrito es: $${resultado} USD`)
-
-        precios = []
-        console.log(precios)
-    })
+    totalCarrito.addEventListener('click', valorTotalCarrito)
 }
 
+function valorTotalCarrito() {
+    
+    // alert(`El total de su carrito es: $${resultado} USD`)
+
+    divMensaje.classList.remove('d-none')
+    exito(`El total de su carrito es: $${resultado} USD`)
+
+    
+}
+
+function exito(mensajeExito) {
+    mensaje.innerHTML = mensajeExito
+}
 
 function agregarCompra(e){
     e.preventDefault();
@@ -66,6 +75,8 @@ function agregarCompra(e){
         leerDatosCurso(compraSeleccionado);
         const eventToast = new bootstrap.Toast(toast)
         eventToast.show()
+        btn.removeAttribute('data-bs-toggle')
+
     }
 
     
@@ -115,7 +126,7 @@ function carrito(){
                 <img src="${compra.imagen}" width = "100">
             </div>
             <p>${compra.titulo}</p>
-            <p>${compra.precio}</p>
+            <p>$${compra.precio.slice(1,4) * compra.cantidad} USD</p>
             <p>${compra.cantidad}</p>
             <p>
                 <a href = "#" class = "borrar-compra" data-id = "${compra.id}">X</a>            </p>
@@ -126,6 +137,22 @@ function carrito(){
     });
 
     agregandoStorage()
+
+    articulosCarrito.forEach(precio => {
+        const total = parseInt(precio.precio.slice(1,4)) * precio.cantidad
+        
+        precios.push(total)
+        console.log(precios)
+        
+    })
+    console.log('holaaaa')
+    console.log(precios)
+
+    resultado = precios.reduce((valorPrevio, valorActual) => valorPrevio + valorActual, 0)
+    // valorTotalCarrito()
+
+    precios = []
+    console.log(precios)
 }
 
 function agregandoStorage(){
@@ -141,7 +168,8 @@ function suma(){
         btn.classList.remove('d-none')
         cerrarCarrito.classList.add('d-none')
         totalCarrito.classList.add('d-none')
-        alert('Carrito Vacío')
+        divMensaje.classList.add('d-none')
+        btn.setAttribute('data-bs-toggle', 'modal')
 
     }else{
         resultadoCarrito.classList.remove('d-none')
@@ -150,6 +178,7 @@ function suma(){
         btn.classList.add('d-none')
         botonVacio.classList.remove('d-none')
         totalCarrito.classList.remove('d-none')
+        // btn.removeAttribute('data-bs-toggle')
     }
 }
 
@@ -172,6 +201,8 @@ function eliminarCarrito(e){
 
         carrito();
         suma()
+        valorTotalCarrito()
+        divMensaje.classList.add('d-none')
     }
 }
 

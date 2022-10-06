@@ -281,7 +281,33 @@
 
             <div id="carrito" class="d-flex justify-content-center">
 
-                <button type="button" class="btn btn-warning my-4 boton">Carrito</button>
+                <!-- <button type="button" class="btn btn-warning my-4 boton">Carrito</button> -->
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-warning boton my-4" data-bs-target="#exampleModal">
+                    Carrito
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Alerta!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Carrito Vacio, agregue artículos
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Entendido</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="col-12 d-none mb-4 indicadores">
                 <p>Imagen</p>
@@ -295,22 +321,29 @@
             <div class="d-flex flex-column align-items-center justify-content-center ">
 
                 <button type="button" class="btn btn-danger my-2 botonVacio d-none">Vaciar Carrito</button>
+                
                 <button type="button" class="btn btn-warning my-2 cerrarCarrito d-none">Cerrar Carrito</button>
                 <button type="button" class="btn btn-success my-2 totalCarrito d-none">Ver total</button>
+
+                <div class="alert alert-success mt-4 divMensaje d-none" role="alert">
+                    <h4 class="alert-heading">Total del Carrito</h4>
+                    <p class="mensaje"></p>
+                    <hr>
+                </div>
             </div>
 
-            
+
 
         </div>
         </div>
     </main>
 
-    <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast align-items-center bg-primary text-light" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
                 Artículo agregado al carrito
             </div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
+            <button type="button" class="btn-close me-2 m-auto btn-close-white" data-bs-dismiss="toast"
                 aria-label="Close"></button>
         </div>
     </div>
