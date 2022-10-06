@@ -8,12 +8,11 @@ const totalCarrito = document.querySelector('.totalCarrito')
 const divMensaje = document.querySelector('.divMensaje')
 const mensaje = document.querySelector('.mensaje')
 const toast = document.querySelector('.toast')
-const modalOpen = document.querySelector('.modal-open')
-const cuerpo = document.querySelector('body')
 
 let resultado
 let articulosCarrito = []
 let precios = []
+
 
 if (articulosCarrito.length === 0) {
     btn.setAttribute('data-bs-toggle', 'modal')
@@ -21,6 +20,10 @@ if (articulosCarrito.length === 0) {
 
 cargarEventos()
 function cargarEventos(){
+    document.addEventListener('DOMContentLoaded', () => {
+        btn.removeAttribute('data-bs-toggle')
+
+    })
     listaCompras.addEventListener('click', agregarCompra);
 
 
@@ -178,8 +181,10 @@ function suma(){
         btn.classList.add('d-none')
         botonVacio.classList.remove('d-none')
         totalCarrito.classList.remove('d-none')
-        // btn.removeAttribute('data-bs-toggle')
+        btn.removeAttribute('data-bs-toggle')
     }
+console.log(btn);
+
 }
 
 function eliminarCarrito(e){
