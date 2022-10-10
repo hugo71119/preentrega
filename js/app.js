@@ -14,9 +14,11 @@ let articulosCarrito = []
 let precios = []
 
 
-if (articulosCarrito.length === 0) {
-    btn.setAttribute('data-bs-toggle', 'modal')
-}
+// if (articulosCarrito.length === 0) {
+//     btn.setAttribute('data-bs-toggle', 'modal')
+// }
+
+articulosCarrito === 0 ? btn.setAttribute('data-bs-toggle', 'modal') : ''; // Operador Ternario
 
 cargarEventos()
 function cargarEventos(){
@@ -32,7 +34,7 @@ function cargarEventos(){
     resultadoCarrito.addEventListener('click', eliminarCarrito)
 
     document.addEventListener('DOMContentLoaded', () => {
-        articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) ?? []
+        articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) ?? [] // Nullish Coalescing
 
         carrito()
     })
@@ -95,8 +97,10 @@ function leerDatosCurso(compra){
     };
     console.log(infoCompra)
 
+    const { id } = infoCompra // Destructuración
+
     // Revisa si un elemento ya existe en el carrito
-    const existe = articulosCarrito.some( compra => compra.id === infoCompra.id );
+    const existe = articulosCarrito.some( compra => compra.id === id );
     if (existe) {
         // Actualizamos la cantidad 
         const compras = articulosCarrito.map( compra => {
@@ -107,10 +111,10 @@ function leerDatosCurso(compra){
                 return compra;// Retorna el objeto que no son duplicados
             }
         });
-        articulosCarrito = [...compras];
+        articulosCarrito = [...compras]; // Spread
     }else{
         // Agrega elementos al arreglo del carrito
-        articulosCarrito = [...articulosCarrito, infoCompra];
+        articulosCarrito = [...articulosCarrito, infoCompra];  // Spread
     }
 
     console.log(articulosCarrito);
@@ -144,11 +148,10 @@ function carrito(){
     articulosCarrito.forEach(precio => {
         const total = parseInt(precio.precio.slice(1,4)) * precio.cantidad
         
-        precios.push(total)
+        precios = [...precios, total] // Spread
         console.log(precios)
         
     })
-    console.log('holaaaa')
     console.log(precios)
 
     resultado = precios.reduce((valorPrevio, valorActual) => valorPrevio + valorActual, 0)
